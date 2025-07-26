@@ -4,26 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Read Me When You Need Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: url('https://images.unsplash.com/photo-1532634896-26909d0d4b6f?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
-      background-size: cover;
-      color: #4a004e;
+      font-family: 'Nunito', sans-serif;
+      background: url('https://static.vecteezy.com/system/resources/previews/002/568/652/original/pink-cute-princess-pattern-seamless-background-with-a-pink-crown-gold-stars-on-a-white-background-png.png') repeat center center fixed;
+      background-size: auto;
+      color: #5a2636;
       text-align: center;
     }
-
     h1 {
-      font-family: 'Pacifico', cursive;
-      font-size: 3em;
+      font-family: 'Amatic SC', cursive;
+      font-size: 3.5em;
       margin-top: 50px;
-      color: #ff4da6;
-      text-shadow: 1px 1px 4px #fff;
+      color: #d6336c;
+      text-shadow: 1px 1px #fff;
     }
-
     .button-container {
       margin-top: 60px;
       display: flex;
@@ -32,24 +30,22 @@
       gap: 20px;
       padding: 0 20px;
     }
-
     button {
-      background: linear-gradient(145deg, #ff99cc, #ff66b2);
+      background: linear-gradient(145deg, #ff80b3, #ff3399);
       border: none;
       color: white;
-      font-size: 1em;
+      font-family: 'Amatic SC', cursive;
+      font-size: 1.2em;
       padding: 15px 25px;
-      border-radius: 30px;
+      border-radius: 40px;
       cursor: pointer;
       transition: transform 0.2s ease, background 0.3s ease;
-      box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+      box-shadow: 0 6px 20px rgba(255, 51, 153, 0.5);
     }
-
     button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(145deg, #ff66b2, #ff3385);
+      transform: scale(1.07);
+      background: linear-gradient(145deg, #ff3399, #e60073);
     }
-
     .message {
       display: none;
       margin-top: 40px;
@@ -59,23 +55,22 @@
       margin-right: auto;
       background: rgba(255, 240, 250, 0.9);
       border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+      box-shadow: 0 4px 15px rgba(255, 51, 153, 0.3);
       font-size: 1.1em;
       line-height: 1.6em;
       font-weight: 500;
     }
-
     .back-btn {
       margin-top: 20px;
-      background: #ff85c1;
+      background: #ff99c2;
       color: white;
       padding: 10px 20px;
       border: none;
       border-radius: 20px;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.3);
+      box-shadow: 0 4px 10px rgba(255, 51, 153, 0.3);
+      font-family: 'Nunito', sans-serif;
     }
-
     .back-btn:hover {
       background: #ff4da6;
     }
@@ -83,7 +78,6 @@
 </head>
 <body>
   <h1>Read Me When You Need Me</h1>
-
   <div class="button-container" id="buttons">
     <button onclick="showMessage('down')">Open when you feel down</button>
     <button onclick="showMessage('happy')">Open when you feel happy</button>
@@ -97,28 +91,22 @@
   </div>
 
   <script>
-    let currentMessage = "";
-
+    let current = '';
     const messages = {
-      down: `Hey love, I know you're feeling low right now. But remember, you're never truly alone. I'm just a message away, always cheering for you even when I'm not near. Take a deep breath, cry if you need, but promise me you'll get back up again. You're stronger than any bad day. 💖`,
-      happy: `Yay! I'm so happy you're happy 😄 Your smile lights up my world. Whenever you're joyful, know that it fills my heart too. Let’s celebrate every little win — you deserve all the goodness this world has to offer. Keep shining, sunshine! ✨`,
-      anxious: `It’s okay to feel anxious sometimes. Life can be overwhelming, but I believe in you. Close your eyes, breathe slowly, and remember — this too shall pass. I’m proud of how far you’ve come. You’ve got this, and I’ve got you. 💗`,
-      confident: `You are amazing, capable, and resilient. Don’t let anyone or anything dim that fire in you. Walk tall, speak your mind, and let the world see the incredible person I see in you every day. You’re unstoppable! 💪🌸`
+      down: "Hey love, I know you're feeling low right now. But remember, you're never truly alone. I'm just a message away, always cheering for you. Take a deep breath—you’re stronger than any bad day. 💖",
+      happy: "Yay! I'm so happy you're happy 😄 Your smile lights up my world. You deserve every bit of joy today. Thank you for being you—shine on, sweet sunshine!",
+      anxious: "It’s okay to feel anxious sometimes. Just breathe... in, out. You’re doing great even if it doesn’t feel that way. I believe in you—always and forever. ❤️",
+      confident: "Look at you—strong, capable, resilient. You're more amazing than you realize in this very moment. Believe it. You are unstoppable. 💪"
     };
-
-    function showMessage(type) {
-      if (currentMessage === type) {
-        goBack();
-        return;
-      }
-      currentMessage = type;
-      document.getElementById('messageContent').innerText = messages[type];
+    function showMessage(key) {
+      if (current === key) { goBack(); return; }
+      current = key;
+      document.getElementById('messageContent').innerText = messages[key];
       document.getElementById('buttons').style.display = 'none';
       document.getElementById('messageBox').style.display = 'block';
     }
-
     function goBack() {
-      currentMessage = "";
+      current = '';
       document.getElementById('messageBox').style.display = 'none';
       document.getElementById('buttons').style.display = 'flex';
     }
