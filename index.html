@@ -3,149 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Read Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito&display=swap" rel="stylesheet">
+  <title>Read Me When You Need Me</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      padding: 40px 20px;
-      background: url('background.jpg') no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Nunito', sans-serif;
-      color: #333;
-    }
-
-    h1 {
+      padding: 0;
       font-family: 'Dancing Script', cursive;
-      font-size: 52px;
-      color: #4a2c52;
+      background: url('https://images.unsplash.com/photo-1606312619344-ff7f89d88f70?auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
       text-align: center;
+      padding: 40px 20px;
+    }
+    h1 {
+      font-size: 3em;
       margin-bottom: 40px;
+      color: #5a3e36;
+      text-shadow: 1px 1px #fff;
     }
-
-    .button-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-      max-width: 500px;
-      margin: 0 auto 30px;
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
     }
-
-    .button-grid button {
-      padding: 16px 24px;
-      font-size: 17px;
+    button {
+      font-family: 'Dancing Script', cursive;
+      padding: 15px 25px;
+      font-size: 1.2em;
       border: none;
       border-radius: 10px;
-      background-color: #a17ec1;
-      color: #fff;
       cursor: pointer;
-      transition: all 0.3s;
+      background-color: #ffc0cb;
+      color: #4a2c2a;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
     }
-
-    .button-grid button:hover {
-      background-color: #8b66a8;
+    button:hover {
+      background-color: #ffb6c1;
     }
-
-    .message {
+    #message-box {
+      margin-top: 40px;
+      font-size: 1.5em;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      padding: 30px;
       display: none;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 24px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.85);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      line-height: 1.7;
-      font-size: 18px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #5a3e36;
     }
-
-    .back-button {
+    #back-button {
+      display: none;
       margin-top: 20px;
-      text-align: center;
-    }
-
-    .back-button button {
       padding: 10px 20px;
-      font-size: 16px;
+      font-size: 1em;
       border: none;
       border-radius: 8px;
-      background-color: #6c5b7b;
-      color: white;
+      background-color: #ffd3dc;
       cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .back-button button:hover {
-      background-color: #57436b;
     }
   </style>
 </head>
 <body>
   <h1>Read Me When You Need Me</h1>
-
-  <div class="button-grid" id="buttons">
-    <button data-target="down">Open when you feel down</button>
-    <button data-target="happy">Open when you feel Happy</button>
-    <button data-target="anxious">Open when you are anxious</button>
-    <button data-target="confidence">Open when you need confidence</button>
+  <div class="button-container" id="button-container">
+    <button onclick="showMessage('down')">Open when you feel down</button>
+    <button onclick="showMessage('happy')">Open when you feel Happy</button>
+    <button onclick="showMessage('anxious')">Open when you are anxious</button>
+    <button onclick="showMessage('confidence')">Open when you need confidence</button>
   </div>
 
-  <div id="down" class="message">
-    Hey love, it’s okay to feel this way sometimes. Even the brightest stars need to rest behind the clouds. You're allowed to be sad, but never forget how strong, kind, and beautiful you are — inside and out.<br><br>
-    Life can feel heavy, but I’m always here to carry some of that weight with you.  
-    Take a breath. Drink some water. Let the world slow down.  
-    Close your eyes and remember you are deeply loved.  
-    Better days are coming — and you’ve already survived so many storms.  
-    I’m proud of you, always. 💜  
-    <div class="back-button"><button onclick="goBack()">← Back</button></div>
-  </div>
-
-  <div id="happy" class="message">
-    Ahh! You're feeling happy — and that fills my heart too! 🥹✨  
-    I hope you're smiling wide, dancing around, or just soaking in the sunshine of this moment.  
-    You deserve every bit of this joy, because you bring so much of it into the world.  
-    Keep this feeling close, write it down if you can — so you can revisit it whenever you need a spark.  
-    I’m celebrating with you in spirit — sending you high fives and hugs across the distance.  
-    Let your heart shine. Your happiness is beautiful. 🌞💛  
-    <div class="back-button"><button onclick="goBack()">← Back</button></div>
-  </div>
-
-  <div id="anxious" class="message">
-    Breathe with me — slowly, in and out. 🌿  
-    You’re safe. This moment will pass. You don’t need to solve everything right now.  
-    I know your mind might feel like it’s racing, but you have weathered this feeling before — and you will again.  
-    Ground yourself — look at five things you can see, four things you can touch, three you can hear.  
-    Let go of the pressure to be okay instantly. I am with you, no matter how heavy it feels.  
-    You're not alone — and this feeling is not forever. One breath at a time, my love. 🫶  
-    <div class="back-button"><button onclick="goBack()">← Back</button></div>
-  </div>
-
-  <div id="confidence" class="message">
-    You’ve got this. Seriously — read that again: **You. Have. Got. This.** 💪  
-    I’ve seen you do amazing things — and this is no different.  
-    Doubts are normal, but they don’t define you. You are capable, brilliant, and brave beyond measure.  
-    Think of everything you’ve overcome, how much you’ve grown, how deeply you care.  
-    That strength? It’s real. And it’s yours.  
-    Now go out there — not because you have to prove anything, but because you already shine. 💫  
-    I believe in you — always.  
-    <div class="back-button"><button onclick="goBack()">← Back</button></div>
-  </div>
+  <div id="message-box"></div>
+  <button id="back-button" onclick="goBack()">← Back</button>
 
   <script>
-    function goBack() {
-      document.querySelectorAll('.message').forEach(msg => msg.style.display = 'none');
-      document.getElementById('buttons').style.display = 'grid';
+    const messages = {
+      down: `Hey love, I know some days feel heavier than others. Just remember, even the darkest night will end and the sun will rise. I'm always just a thought away. You’ve survived 100% of your hard days so far — and I’m so proud of you. Take a deep breath, feel my love around you, and remember you’re never alone.`,
+      happy: `Yay! You're feeling happy and I’m so glad! Your smile lights up the world, especially mine. I hope today is filled with joy, laughter, and little wins. You deserve all the happiness in the world and more. Share that sunshine of yours, because it makes everything better. 😊`,
+      anxious: `Deep breath. Inhale. Exhale. It's okay to feel overwhelmed sometimes. You don’t have to have all the answers right now. Just take it one tiny moment at a time. You’re doing your best, and that’s more than enough. I believe in you — always have, always will. You’ve got this. ❤️`,
+      confidence: `Look at you — strong, capable, and full of potential. You have so much within you, even when you doubt it. Let today be the day you remind yourself of how far you’ve come. Stand tall, speak kindly to yourself, and go conquer the world like I know you can. You are unstoppable. 💪`
+    };
+
+    let currentMessage = null;
+
+    function showMessage(type) {
+      if (currentMessage === type) {
+        goBack();
+        return;
+      }
+
+      currentMessage = type;
+      document.getElementById("message-box").innerText = messages[type];
+      document.getElementById("message-box").style.display = "block";
+      document.getElementById("button-container").style.display = "none";
+      document.getElementById("back-button").style.display = "inline-block";
     }
 
-    document.getElementById('buttons').addEventListener('click', e => {
-      if (e.target.tagName === 'BUTTON') {
-        const id = e.target.getAttribute('data-target');
-        const msg = document.getElementById(id);
-        // hide all others
-        document.querySelectorAll('.message').forEach(m => m.style.display = 'none');
-        msg.style.display = 'block';
-        document.getElementById('buttons').style.display = 'none';
-      }
-    });
+    function goBack() {
+      currentMessage = null;
+      document.getElementById("message-box").style.display = "none";
+      document.getElementById("button-container").style.display = "flex";
+      document.getElementById("back-button").style.display = "none";
+    }
   </script>
 </body>
 </html>
