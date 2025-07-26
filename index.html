@@ -9,20 +9,56 @@
     body {
       background: #fdf6f0;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      justify-content: center;
+      min-height: 100vh;
       margin: 0;
+      font-family: 'Segoe UI', sans-serif;
     }
+
     h1 {
       font-family: 'Great Vibes', cursive;
       font-size: 48px;
       color: #8e44ad;
       text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .button-grid button {
+      padding: 15px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 12px;
+      background-color: #d5a6f1;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .button-grid button:hover {
+      background-color: #b97bdc;
+      transform: translateY(-2px);
     }
   </style>
 </head>
 <body>
   <h1>Read Me When You Need Me</h1>
+
+  <div class="button-grid">
+    <button onclick="alert('It’s okay to feel down. I believe in you. 🌧️💜')">Open when you feel down</button>
+    <button onclick="alert('Yay! I’m happy you’re happy 🎉💛')">Open when you feel Happy</button>
+    <button onclick="alert('Take a deep breath. You are safe. 🌿💙')">Open when you are anxious</button>
+    <button onclick="alert('You’ve got this. You’re stronger than you think! 💪✨')">Open when you need confidence</button>
+  </div>
 </body>
 </html>
