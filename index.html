@@ -4,125 +4,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Read Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400&display=swap" rel="stylesheet">
   <style>
     body {
-      background: #fdf6f0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: start;
-      min-height: 100vh;
-      padding: 40px 20px;
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
+      padding: 40px 20px;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
     }
-
     h1 {
-      font-family: 'Great Vibes', cursive;
-      font-size: 48px;
-      color: #8e44ad;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      font-family: 'Playfair Display', serif;
+      font-size: 52px;
+      color: #4a2c52;
+      text-align: center;
       margin-bottom: 40px;
     }
-
     .button-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 18px;
       max-width: 500px;
-      width: 100%;
-      margin-bottom: 40px;
+      margin: 0 auto 30px;
     }
-
     .button-grid button {
-      padding: 15px 20px;
-      font-size: 16px;
+      padding: 16px 24px;
+      font-size: 17px;
       border: none;
-      border-radius: 12px;
-      background-color: #d5a6f1;
+      border-radius: 10px;
+      background-color: #a17ec1;
       color: #fff;
       cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
-
     .button-grid button:hover {
-      background-color: #b97bdc;
-      transform: translateY(-2px);
+      background-color: #8b66a8;
     }
-
     .message {
       display: none;
-      background-color: #fff;
-      color: #333;
-      border-left: 5px solid #8e44ad;
-      padding: 20px;
-      margin-top: 10px;
       max-width: 600px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      line-height: 1.6;
+      margin: 0 auto;
+      padding: 24px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.85);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      line-height: 1.7;
+      font-size: 18px;
     }
   </style>
 </head>
 <body>
   <h1>Read Me When You Need Me</h1>
 
-  <div class="button-grid">
-    <button onclick="showMessage('down')">Open when you feel down</button>
-    <button onclick="showMessage('happy')">Open when you feel Happy</button>
-    <button onclick="showMessage('anxious')">Open when you are anxious</button>
-    <button onclick="showMessage('confidence')">Open when you need confidence</button>
+  <div class="button-grid" id="buttons">
+    <button data-target="down">Open when you feel down</button>
+    <button data-target="happy">Open when you feel Happy</button>
+    <button data-target="anxious">Open when you are anxious</button>
+    <button data-target="confidence">Open when you need confidence</button>
   </div>
 
   <div id="down" class="message">
-    Hey love, it’s okay to feel this way sometimes. Even the brightest stars need to rest behind the clouds. You're allowed to be sad, but never forget how strong, kind, and beautiful you are — inside and out.  
-    Life can feel heavy, but I’m always here to carry some of that weight with you.  
-    Take a breath. Drink some water. Let the world slow down.  
-    Close your eyes and remember you are deeply loved.  
-    Better days are coming — and you’ve already survived so many storms.  
-    I’m proud of you, always. 💜  
+    [Your custom 10+ lines comforting message for feeling down…]
   </div>
-
   <div id="happy" class="message">
-    Ahh! You're feeling happy — and that fills my heart too! 🥹✨  
-    I hope you're smiling wide, dancing around, or just soaking in the sunshine of this moment.  
-    You deserve every bit of this joy, because you bring so much of it into the world.  
-    Keep this feeling close, write it down if you can — so you can revisit it whenever you need a spark.  
-    I’m celebrating with you in spirit — sending you high fives and hugs across the distance.  
-    Let your heart shine. Your happiness is beautiful. 🌞💛  
+    [Your custom joyful message for feeling happy…]
   </div>
-
   <div id="anxious" class="message">
-    Breathe with me — slowly, in and out. 🌿  
-    You’re safe. This moment will pass. You don’t need to solve everything right now.  
-    I know your mind might feel like it’s racing, but you have weathered this feeling before — and you will again.  
-    Ground yourself — look at five things you can see, four things you can touch, three you can hear.  
-    Let go of the pressure to be okay instantly. I am with you, no matter how heavy it feels.  
-    You're not alone — and this feeling is not forever. One breath at a time, my love. 🫶  
+    [Your calm, room-filling text for anxiety…]
   </div>
-
   <div id="confidence" class="message">
-    You’ve got this. Seriously — read that again: **You. Have. Got. This.** 💪  
-    I’ve seen you do amazing things — and this is no different.  
-    Doubts are normal, but they don’t define you. You are capable, brilliant, and brave beyond measure.  
-    Think of everything you’ve overcome, how much you’ve grown, how deeply you care.  
-    That strength? It’s real. And it’s yours.  
-    Now go out there — not because you have to prove anything, but because you already shine. 💫  
-    I believe in you — always.  
+    [Your powerful confidence-building message…]
   </div>
 
   <script>
-    function showMessage(id) {
-      // Hide all messages
-      const messages = document.querySelectorAll('.message');
-      messages.forEach(msg => msg.style.display = 'none');
-
-      // Show selected
-      const target = document.getElementById(id);
-      if (target) target.style.display = 'block';
-    }
+    let last = null;
+    document.getElementById('buttons').addEventListener('click', e => {
+      if (e.target.tagName === 'BUTTON') {
+        const id = e.target.getAttribute('data-target');
+        const msg = document.getElementById(id);
+        const shown = msg.style.display === 'block';
+        // hide all
+        document.querySelectorAll('.message').forEach(m => m.style.display = 'none');
+        document.getElementById('buttons').style.display = 'grid';
+        if (!shown) {
+          msg.style.display = 'block';
+          document.getElementById('buttons').style.display = 'none';
+          last = id;
+        } else {
+          last = null;
+        }
+      }
+    });
   </script>
 </body>
 </html>
