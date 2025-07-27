@@ -4,111 +4,139 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Read Me When You Need Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Nunito', sans-serif;
+      font-family: 'Dancing Script', cursive;
       background: url('background.png') repeat center center fixed;
-      background-size: auto;
-      color: #5a2636;
-      text-align: center;
+      background-size: contain;
+      color: #b30059;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
     }
+
     h1 {
-      font-family: 'Amatic SC', cursive;
-      font-size: 3.5em;
-      margin-top: 50px;
-      color: #d6336c;
-      text-shadow: 1px 1px #fff;
+      font-size: 3em;
+      margin-bottom: 30px;
+      text-align: center;
+      text-shadow: 1px 1px 2px #fff;
     }
+
     .button-container {
-      margin-top: 60px;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      padding: 0 20px;
     }
-    button {
-      background: linear-gradient(145deg, #ff80b3, #ff3399);
-      border: none;
-      color: white;
-      font-family: 'Amatic SC', cursive;
-      font-size: 1.2em;
+
+    .button-container button, .nav-buttons button {
       padding: 15px 25px;
-      border-radius: 40px;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s ease;
-      box-shadow: 0 6px 20px rgba(255, 51, 153, 0.5);
-    }
-    button:hover {
-      transform: scale(1.07);
-      background: linear-gradient(145deg, #ff3399, #e60073);
-    }
-    .message {
-      display: none;
-      margin-top: 40px;
-      padding: 30px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      background: rgba(255, 240, 250, 0.9);
-      border-radius: 20px;
-      box-shadow: 0 4px 15px rgba(255, 51, 153, 0.3);
-      font-size: 1.1em;
-      line-height: 1.6em;
-      font-weight: 500;
-    }
-    .back-btn {
-      margin-top: 20px;
-      background: #ff99c2;
-      color: white;
-      padding: 10px 20px;
+      font-size: 1.2em;
       border: none;
-      border-radius: 20px;
+      border-radius: 12px;
+      background-color: #ffb6c1;
+      color: white;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(255, 51, 153, 0.3);
-      font-family: 'Nunito', sans-serif;
+      transition: background-color 0.3s ease;
+      box-shadow: 2px 2px 6px #ccc;
     }
-    .back-btn:hover {
-      background: #ff4da6;
+
+    .button-container button:hover, .nav-buttons button:hover {
+      background-color: #ff69b4;
+    }
+
+    #message {
+      max-width: 80%;
+      text-align: center;
+      font-size: 1.5em;
+      margin: 30px 0;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 2px 2px 12px #e7a4c0;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
   <h1>Read Me When You Need Me</h1>
-  <div class="button-container" id="buttons">
+  
+  <div class="button-container" id="main-buttons">
     <button onclick="showMessage('down')">Open when you feel down</button>
     <button onclick="showMessage('happy')">Open when you feel happy</button>
     <button onclick="showMessage('anxious')">Open when you are anxious</button>
-    <button onclick="showMessage('confident')">Open when you need confidence</button>
+    <button onclick="showMessage('confidence')">Open when you need confidence</button>
   </div>
 
-  <div class="message" id="messageBox">
-    <div id="messageContent"></div>
-    <button class="back-btn" onclick="goBack()">Back</button>
+  <div id="message" class="hidden"></div>
+
+  <div class="nav-buttons hidden" id="nav-buttons">
+    <button onclick="showNext()">Give me one more</button>
+    <button onclick="goBack()">Back</button>
   </div>
 
   <script>
-    let current = '';
     const messages = {
-      down: "Hey love, I know you're feeling low right now. But remember, you're never truly alone. I'm just a message away, always cheering for you. Take a deep breath—you’re stronger than any bad day. 💖",
-      happy: "Yay! I'm so happy you're happy 😄 Your smile lights up my world. You deserve every bit of joy today. Thank you for being you—shine on, sweet sunshine!",
-      anxious: "It’s okay to feel anxious sometimes. Just breathe... in, out. You’re doing great even if it doesn’t feel that way. I believe in you—always and forever. ❤️",
-      confident: "Look at you—strong, capable, resilient. You're more amazing than you realize in this very moment. Believe it. You are unstoppable. 💪"
+      down: [
+        "Even the darkest night will end and the sun will rise 🌅.",
+        "You’re allowed to feel low, just don’t unpack and live there 💖.",
+        "You are stronger than you think and braver than you feel ✨.",
+        "Take a deep breath. You’ve made it through tough days before, and you will again 💪."
+      ],
+      happy: [
+        "Bask in this moment, you earned it 💫.",
+        "Smile big, laugh loud — happiness looks good on you 😄.",
+        "Keep spreading joy — the world needs your light 🌟.",
+        "This moment is precious. Soak it in and treasure it 💕."
+      ],
+      anxious: [
+        "You are safe. This moment will pass 🤍.",
+        "Breathe deeply. You’ve got this 🌬️.",
+        "Let go of the things you can’t control. Focus on the now 🧘.",
+        "You are not alone. You are loved, always ❤️."
+      ],
+      confidence: [
+        "You are capable of amazing things 💥.",
+        "Look how far you’ve come. That’s no small feat 👏.",
+        "Believe in yourself — because I already do 💗.",
+        "You’ve got the fire. Now go set the world alight 🔥."
+      ]
     };
-    function showMessage(key) {
-      if (current === key) { goBack(); return; }
-      current = key;
-      document.getElementById('messageContent').innerText = messages[key];
-      document.getElementById('buttons').style.display = 'none';
-      document.getElementById('messageBox').style.display = 'block';
+
+    let currentCategory = '';
+    let messageIndex = 0;
+
+    function showMessage(category) {
+      currentCategory = category;
+      messageIndex = 0;
+      document.getElementById("message").textContent = messages[category][messageIndex];
+      document.getElementById("main-buttons").classList.add("hidden");
+      document.getElementById("message").classList.remove("hidden");
+      document.getElementById("nav-buttons").classList.remove("hidden");
     }
+
+    function showNext() {
+      messageIndex = (messageIndex + 1) % messages[currentCategory].length;
+      document.getElementById("message").textContent = messages[currentCategory][messageIndex];
+    }
+
     function goBack() {
-      current = '';
-      document.getElementById('messageBox').style.display = 'none';
-      document.getElementById('buttons').style.display = 'flex';
+      document.getElementById("message").classList.add("hidden");
+      document.getElementById("nav-buttons").classList.add("hidden");
+      document.getElementById("main-buttons").classList.remove("hidden");
     }
   </script>
 </body>
