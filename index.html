@@ -4,211 +4,232 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Read Me When You Need Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Quicksand', sans-serif;
-      background: url('https://i.pinimg.com/originals/6b/cb/36/6bcb36855faedee96a1c7631fd44e939.jpg') no-repeat center center fixed;
+      font-family: 'Poppins', sans-serif;
+      background: url('https://i.pinimg.com/originals/e8/df/4a/e8df4aa14757db7c508a403efba51a29.jpg') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
       text-align: center;
-      cursor: url('https://cur.cursors-4u.net/nature/nat-11/nat1083.cur'), auto;
-      transition: all 0.4s ease;
+      overflow-x: hidden;
+      cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym53.cur'), auto;
     }
 
     h1 {
       font-family: 'Pacifico', cursive;
-      font-size: 3em;
-      margin-top: 40px;
-      color: #ffb6c1;
-      text-shadow: 2px 2px 6px #ff69b4;
+      font-size: 3rem;
+      color: #fff;
+      text-shadow: 2px 2px 4px #ff69b4;
+      margin: 30px 0 10px;
     }
 
-    .button-container {
+    .buttons {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 50px;
+      margin-top: 30px;
       gap: 20px;
     }
 
-    .mood-button, .back-button, .next-button {
-      background: #ff69b4;
+    button {
+      background-color: #ffb6c1;
       border: none;
-      color: white;
       padding: 15px 25px;
-      font-size: 1em;
+      font-size: 1rem;
       border-radius: 25px;
+      color: white;
       cursor: pointer;
-      box-shadow: 0 0 15px #ff69b4;
-      transition: transform 0.2s ease, background 0.3s ease;
+      box-shadow: 0 0 10px #ff69b4;
+      transition: transform 0.3s ease, background 0.3s ease;
     }
 
-    .mood-button:hover, .back-button:hover, .next-button:hover {
+    button:hover {
       transform: scale(1.05);
-      background: #ff85c1;
+      background-color: #ff69b4;
     }
 
-    .message-box {
-      max-width: 80%;
-      margin: 30px auto;
-      font-size: 1.3em;
-      background: rgba(255, 192, 203, 0.2);
+    .message {
+      display: none;
+      font-size: 1.2rem;
       padding: 20px;
-      border-radius: 20px;
-      backdrop-filter: blur(5px);
-      animation: fadeIn 0.5s ease-in-out;
+      max-width: 90%;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      color: white;
+      margin-top: 30px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .gif {
+      width: 200px;
+      margin-top: 20px;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    .fade {
+      animation: fadeIn 0.5s ease;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
-    canvas#heartCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      width: 100%;
-      height: 100%;
-    }
-
-    audio {
+    .hidden {
       display: none;
     }
 
-    .action-buttons {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
+    .music-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background-color: #fff0f5;
+      color: #ff69b4;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 5px pink;
     }
   </style>
 </head>
 <body>
+  <h1>Read Me When You Need Me</h1>
 
-<h1>Read Me When You Need Me</h1>
+  <div class="music-toggle" onclick="toggleMusic()">🎵 Music</div>
+  <audio id="bgMusic" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mp3">
+  </audio>
 
-<div class="button-container" id="moodButtons">
-  <button class="mood-button" onclick="showMessage('down')">Open when you feel down</button>
-  <button class="mood-button" onclick="showMessage('happy')">Open when you feel happy</button>
-  <button class="mood-button" onclick="showMessage('anxious')">Open when you are anxious</button>
-  <button class="mood-button" onclick="showMessage('confidence')">Open when you need confidence</button>
-</div>
+  <div id="moodTracker" class="buttons fade">
+    <button onclick="startMood('down')">I feel down</button>
+    <button onclick="startMood('happy')">I feel happy</button>
+    <button onclick="startMood('anxious')">I feel anxious</button>
+    <button onclick="startMood('confidence')">I need confidence</button>
+  </div>
 
-<div class="message-box" id="messageBox" style="display:none;"></div>
+  <div id="mainButtons" class="buttons hidden">
+    <button onclick="showMessage('down')">Open when you feel down</button>
+    <button onclick="showMessage('happy')">Open when you feel happy</button>
+    <button onclick="showMessage('anxious')">Open when you are anxious</button>
+    <button onclick="showMessage('confidence')">Open when you need confidence</button>
+  </div>
 
-<div class="action-buttons" id="actionButtons" style="display:none;">
-  <button class="back-button" onclick="goBack()">Back</button>
-  <button class="next-button" onclick="giveMore()">Give me one more</button>
-</div>
+  <div id="messageBox" class="message">
+    <p id="messageText"></p>
+    <img id="gifImage" class="gif" src="" alt="">
+    <div class="controls">
+      <button onclick="nextMessage()">Give me one more</button>
+      <button onclick="goBack()">Back</button>
+    </div>
+  </div>
 
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_1ce709d848.mp3?filename=sweet-relaxing-piano-144998.mp3" type="audio/mpeg">
-</audio>
-
-<canvas id="heartCanvas"></canvas>
-
-<script>
-  const messages = {
-    down: [
-      "You are stronger than you think. Every storm will pass.",
-      "Take a deep breath. You're doing the best you can.",
-      "Your feelings are valid. Give yourself the love you deserve.",
-      "The world is better with you in it. Don't forget that."
-    ],
-    happy: [
-      "Keep shining! Your smile is contagious 🌟",
-      "Happiness looks great on you!",
-      "Celebrate the little joys — they make life beautiful.",
-      "Remember this feeling and return to it often."
-    ],
-    anxious: [
-      "Close your eyes. Inhale peace, exhale worry.",
-      "You're not alone. You've faced this before and conquered it.",
-      "One step at a time. You’ve got this.",
-      "Let go of what you can't control. You're safe now."
-    ],
-    confidence: [
-      "You have every reason to believe in yourself.",
-      "Walk in like you own the room — because you do!",
-      "Your potential is endless. Keep pushing.",
-      "You’re worthy of every success and dream."
-    ]
-  };
-
-  let currentMood = '';
-  let currentIndex = 0;
-
-  function showMessage(mood) {
-    currentMood = mood;
-    currentIndex = 0;
-    document.getElementById('moodButtons').style.display = 'none';
-    document.getElementById('messageBox').style.display = 'block';
-    document.getElementById('actionButtons').style.display = 'flex';
-    document.getElementById('messageBox').innerText = messages[mood][currentIndex];
-  }
-
-  function giveMore() {
-    currentIndex = (currentIndex + 1) % messages[currentMood].length;
-    document.getElementById('messageBox').innerText = messages[currentMood][currentIndex];
-  }
-
-  function goBack() {
-    document.getElementById('moodButtons').style.display = 'flex';
-    document.getElementById('messageBox').style.display = 'none';
-    document.getElementById('actionButtons').style.display = 'none';
-  }
-
-  // Falling heart animation
-  const canvas = document.getElementById('heartCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  let hearts = [];
-
-  function createHeart() {
-    return {
-      x: Math.random() * canvas.width,
-      y: -20,
-      size: Math.random() * 10 + 10,
-      speed: Math.random() * 1 + 0.5,
-      opacity: Math.random(),
-      color: `rgba(255, 105, 180, ${Math.random()})`
+  <script>
+    const messages = {
+      down: [
+        ["It’s okay to not be okay. You’re doing your best and that’s enough. 🌸", "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif"],
+        ["You matter. Even if it doesn’t feel like it right now. 💗", "https://media.giphy.com/media/j2mY8F9QHR8U0/giphy.gif"],
+        ["This too shall pass. Take a deep breath. 💖", "https://media.giphy.com/media/xT9Igp7f8KwFZmA1gk/giphy.gif"],
+        ["The world is better with you in it. Never forget that. 💕", "https://media.giphy.com/media/l3vR85PnGsBwu1PFK/giphy.gif"]
+      ],
+      happy: [
+        ["Yay! Spread your happiness like confetti! 🎉", "https://media.giphy.com/media/111ebonMs90YLu/giphy.gif"],
+        ["Your smile is contagious! 😊", "https://media.giphy.com/media/yoJC2El7xJkYCadlWE/giphy.gif"],
+        ["Keep shining like the star you are! 🌟", "https://media.giphy.com/media/l4pTfx2qLszoacZRS/giphy.gif"],
+        ["Happiness looks great on you! 💞", "https://media.giphy.com/media/3ohjUUSdFfZ0BV1Qys/giphy.gif"]
+      ],
+      anxious: [
+        ["Inhale for 4, hold for 4, exhale for 4. You’ve got this. 🌿", "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif"],
+        ["You are safe. You are grounded. One step at a time. 🧘", "https://media.giphy.com/media/xT9IgIc0lryrxvqVGM/giphy.gif"],
+        ["Let go of what you can’t control. 💨", "https://media.giphy.com/media/xT0xeJpnrWC4XWblEk/giphy.gif"],
+        ["Be kind to your mind. 🧠💗", "https://media.giphy.com/media/3o6Zt6zCMqJZhN6ZHa/giphy.gif"]
+      ],
+      confidence: [
+        ["You are more capable than you think. 💪", "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif"],
+        ["You’ve done hard things before, you can do this too. 🔥", "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif"],
+        ["Believe in your magic. ✨", "https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif"],
+        ["Stand tall. You’ve got this. 💼", "https://media.giphy.com/media/xUPGcjGy8I928yIlAQ/giphy.gif"]
+      ]
     };
-  }
 
-  function drawHeart(x, y, size, color) {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.bezierCurveTo(x, y - size / 2, x - size, y - size / 2, x - size, y);
-    ctx.bezierCurveTo(x - size, y + size, x, y + size * 1.5, x, y + size * 2);
-    ctx.bezierCurveTo(x, y + size * 1.5, x + size, y + size, x + size, y);
-    ctx.bezierCurveTo(x + size, y - size / 2, x, y - size / 2, x, y);
-    ctx.fill();
-  }
+    let currentMood = '';
+    let currentIndex = 0;
 
-  function animateHearts() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    hearts.forEach((heart, index) => {
-      heart.y += heart.speed;
-      drawHeart(heart.x, heart.y, heart.size, heart.color);
-      if (heart.y > canvas.height) {
-        hearts.splice(index, 1);
-      }
-    });
-    while (hearts.length < 30) {
-      hearts.push(createHeart());
+    function startMood(mood) {
+      document.getElementById('moodTracker').classList.add('hidden');
+      document.getElementById('mainButtons').classList.remove('hidden');
+      currentMood = mood;
     }
-    requestAnimationFrame(animateHearts);
-  }
 
-  animateHearts();
-</script>
+    function showMessage(mood) {
+      currentMood = mood;
+      currentIndex = 0;
+      displayMessage();
+      document.getElementById('mainButtons').classList.add('hidden');
+    }
 
+    function displayMessage() {
+      const [text, gif] = messages[currentMood][currentIndex];
+      document.getElementById('messageText').innerText = text;
+      document.getElementById('gifImage').src = gif;
+      document.getElementById('messageBox').classList.remove('hidden');
+    }
+
+    function nextMessage() {
+      currentIndex = (currentIndex + 1) % messages[currentMood].length;
+      displayMessage();
+    }
+
+    function goBack() {
+      document.getElementById('messageBox').classList.add('hidden');
+      document.getElementById('mainButtons').classList.remove('hidden');
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById('bgMusic');
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+
+    // Falling hearts
+    const heartCSS = document.createElement('style');
+    heartCSS.innerHTML = `
+      .heart {
+        position: fixed;
+        width: 15px;
+        height: 15px;
+        background: pink;
+        animation: fall 5s linear infinite;
+        top: -10px;
+        border-radius: 50%;
+        left: ${Math.random() * 100}vw;
+        opacity: 0.7;
+        z-index: 0;
+      }
+      @keyframes fall {
+        to {
+          transform: translateY(100vh);
+        }
+      }
+    `;
+    document.head.appendChild(heartCSS);
+
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
+  </script>
 </body>
 </html>
